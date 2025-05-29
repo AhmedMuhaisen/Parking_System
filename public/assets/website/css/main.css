@@ -3177,6 +3177,28 @@ section,
   }
 }
 
+
+
+
+ .profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  object-fit: cover;
+
+}
+
+
+
+
+
+
+
+
+
+
+
 /*--------------------------------------------------------------
 # Service Details Section
 --------------------------------------------------------------*/
@@ -3588,7 +3610,7 @@ section,
   margin-right: 5px;
 }
 
-.service-details .service-sidebar .service-features-list {
+.service-features-list {
   background-color: var(--surface-color);
   border-radius: 15px;
   padding: 30px;
@@ -3596,7 +3618,7 @@ section,
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
 }
 
-.service-details .service-sidebar .service-features-list h4 {
+ .service-features-list h4 {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 25px;
@@ -3604,23 +3626,23 @@ section,
   border-bottom: 2px solid color-mix(in srgb, var(--heading-color), transparent 90%);
 }
 
-.service-details .service-sidebar .service-features-list ul {
+.service-features-list ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.service-details .service-sidebar .service-features-list ul li {
+.service-features-list ul li {
   display: flex;
   align-items: flex-start;
   margin-bottom: 25px;
 }
 
-.service-details .service-sidebar .service-features-list ul li:last-child {
+ .service-features-list ul li:last-child {
   margin-bottom: 0;
 }
 
-.service-details .service-sidebar .service-features-list ul li i {
+.service-features-list ul li i {
   flex-shrink: 0;
   background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
   color: var(--accent-color);
@@ -3634,23 +3656,27 @@ section,
   margin-right: 15px;
 }
 
-.service-details .service-sidebar .service-features-list ul li div {
+.service-features-list div{
+    width: 200px;
+    margin: 7px;
+}
+ .service-features-list ul li div {
   flex: 1;
 }
 
-.service-details .service-sidebar .service-features-list ul li div h5 {
+ .service-features-list ul li div h5 {
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 5px;
 }
 
-.service-details .service-sidebar .service-features-list ul li div p {
+ .service-features-list ul li div p {
   color: color-mix(in srgb, var(--default-color), transparent 25%);
   margin: 0;
   font-size: 14px;
 }
 
-.service-details .service-sidebar .testimonial-card {
+#service-details-tab-4 .testimonial-card {
   background-color: var(--surface-color);
   border-radius: 15px;
   padding: 30px;
@@ -3658,43 +3684,43 @@ section,
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
 }
 
-.service-details .service-sidebar .testimonial-card .testimonial-header {
+#service-details-tab-4  .testimonial-card .testimonial-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.service-details .service-sidebar .testimonial-card .testimonial-header i {
+#service-details-tab-4 .testimonial-card .testimonial-header i {
   font-size: 36px;
   color: var(--accent-color);
   opacity: 0.3;
 }
 
-.service-details .service-sidebar .testimonial-card .testimonial-header .rating {
+#service-details-tab-4  .testimonial-card .testimonial-header .rating {
   display: flex;
 }
 
-.service-details .service-sidebar .testimonial-card .testimonial-header .rating i {
+#service-details-tab-4  .testimonial-card .testimonial-header .rating i {
   color: #FFD700;
   font-size: 16px;
   opacity: 1;
   margin-left: 2px;
 }
 
-.service-details .service-sidebar .testimonial-card .testimonial-text {
+#service-details-tab-4  .testimonial-card .testimonial-text {
   font-style: italic;
   line-height: 1.7;
   margin-bottom: 20px;
   color: color-mix(in srgb, var(--default-color), transparent 15%);
 }
 
-.service-details .service-sidebar .testimonial-card .client-info {
+#service-details-tab-4 .testimonial-card .client-info {
   display: flex;
   align-items: center;
 }
 
-.service-details .service-sidebar .testimonial-card .client-info .client-image {
+#service-details-tab-4  .testimonial-card .client-info .client-image {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -3702,41 +3728,41 @@ section,
   margin-right: 15px;
 }
 
-.service-details .service-sidebar .testimonial-card .client-info .client-details h5 {
+#service-details-tab-4  .testimonial-card .client-info .client-details h5 {
   font-size: 16px;
   font-weight: 700;
   margin: 0 0 5px;
 }
 
-.service-details .service-sidebar .testimonial-card .client-info .client-details span {
+#service-details-tab-4  .testimonial-card .client-info .client-details span {
   font-size: 14px;
   color: color-mix(in srgb, var(--default-color), transparent 30%);
 }
 
-.service-details .service-sidebar .contact-info {
+#service-details-tab-3 .benefit-card {
   background-color: var(--surface-color);
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
 }
 
-.service-details .service-sidebar .contact-info h4 {
+#service-details-tab-3 .benefit-card h4 {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 25px;
 }
 
-.service-details .service-sidebar .contact-info .contact-method {
+#service-details-tab-3 .benefit-card .contact-method {
   display: flex;
   align-items: flex-start;
   margin-bottom: 20px;
 }
 
-.service-details .service-sidebar .contact-info .contact-method:last-child {
+#service-details-tab-3 .benefit-card .contact-method:last-child {
   margin-bottom: 0;
 }
 
-.service-details .service-sidebar .contact-info .contact-method i {
+#service-details-tab-3 .benefit-card .contact-method i {
   flex-shrink: 0;
   width: 40px;
   height: 40px;
@@ -3750,18 +3776,18 @@ section,
   margin-right: 15px;
 }
 
-.service-details .service-sidebar .contact-info .contact-method div {
+#service-details-tab-3 .benefit-card .contact-method div {
   flex: 1;
 }
 
-.service-details .service-sidebar .contact-info .contact-method div span {
+#service-details-tab-3 .benefit-card .contact-method div span {
   display: block;
   font-size: 14px;
   color: color-mix(in srgb, var(--default-color), transparent 30%);
   margin-bottom: 5px;
 }
 
-.service-details .service-sidebar .contact-info .contact-method div p {
+#service-details-tab-3 .benefit-card .contact-method div p {
   margin: 0;
   font-weight: 600;
   color: var(--heading-color);
@@ -3810,6 +3836,10 @@ section,
   .service-details .service-header .lead {
     font-size: 16px;
   }
+
+
+
+
 }
 
 /*--------------------------------------------------------------

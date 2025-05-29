@@ -59,6 +59,7 @@ body {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     width: 100%;
+    padding-top: 20px;
 }
 
 .form-v10-content .form-detail .form-left h2 {
@@ -70,6 +71,7 @@ body {
     background: #4835d4;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+    padding-top: 20px;
 }
 
 .form-v10-content .form-detail .form-right h2 {
@@ -88,8 +90,9 @@ body {
     display: flex !important;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 20px;
+    padding: 0px 40px 10px 40px;
     display: -webkit-flex;
+
 }
 
 .form-v10-content .form-detail .form-row {
@@ -100,12 +103,12 @@ body {
 }
 
 .form-v10-content .form-detail .form-group .form-row.form-row-1 {
-    width: 98%;
+    width: 100%;
     padding: 0 12px;
 }
 
 .form-v10-content .form-detail .form-group .form-row.form-row-2 {
-    width: 45%;
+    width: 50%;
     padding: 0 12px;
 }
 
@@ -114,8 +117,12 @@ body {
    padding: 0 12px 0 0;
 }
 .form-v10-content .form-detail .form-group .form-row.form-row-4 {
-    width: 25%;
-    padding: 0 0 0 25px;
+    width: 65%;
+    margin-right: 33px;
+    border-bottom: 1px solid #cccccc;
+    padding: 13.5px 60px 13.5px 10px;
+    margin-left: 13px;
+
 }
 
 .form-v10-content .form-detail select,

@@ -34,6 +34,26 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    function building()  {
+        return $this->belongsTo(Building::class)->withDefault();
+    }
+
+     function unit()  {
+        return $this->belongsTo(Unit::class)->withDefault();
+    }
+
+       function vehicle()  {
+        return $this->hasMany(Vehicle::class);
+    }
+
+      function guests()  {
+        return $this->hasMany(Guest::class);
+    }
+
+     function testimonials()  {
+        return $this->hasMany(Testimonial::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *

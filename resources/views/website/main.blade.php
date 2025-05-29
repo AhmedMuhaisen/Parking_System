@@ -8,6 +8,8 @@
   <title>Index - Strategy Bootstrap Template</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Favicons -->
   <link href="{{ asset("assets/website/img/favicon.png")}}" rel="icon">
@@ -59,6 +61,9 @@ $Settings=App\Models\Setting::first();
           <li><a href="#How_Work">How Work</a></li>
           <li><a href="#Testimonials">Testimonials</a></li>
           <li><a href="#contact">Contact</a></li>
+          @if(Auth::user())
+  <li><a href="{{ route('website.profile') }}">profile</a></li>
+          @endif
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>

@@ -99,7 +99,7 @@
                        <div class="form-label">
                             <div class="form-row form-row-4"><label for="" class="" style="color: white">vehicle color</label></div>
                             <div class="form-row form-row-3">
-                               <input type="color" name="vehicle_color" id="vehicle_color" class="input-text" style=" width: 20%; border-radius: 30px;  height: 60px; "
+                               <input type="color" name="vehicle_color" id="vehicle_color" class="input-text" style=" width: 40%; border-radius: 30px;  height: 60px; "
                              >
                             </div>
                         </div>
@@ -120,18 +120,8 @@
             </form>
         </div>
     </div>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'UA-23581568-13');
-    </script>
 
-    <div id="monica-content-root" class="monica-widget" style="pointer-events: auto;"></div>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
+</body>
 
 </html>

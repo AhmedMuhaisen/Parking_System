@@ -9,7 +9,6 @@
                 <div class="w-50 col-lg-7 content-col" data-aos="fade-up">
                     <div class="content">
 
-@dd(Auth::user()->second_name )
                         <div class="main-heading">
                             <h1>{{ $settings->Header_title }}</h1>
                         </div>
@@ -334,7 +333,7 @@
                     <div class="contact-form-wrapper">
                         <h2 class="text-center mb-4">Get in Touch</h2>
 
-                        <form action="forms/contact.php" method="post" class="php-email-form">
+                        <form action="{{ route('website.contact') }}" method="post" class="php-email-form">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -360,7 +359,7 @@
                                     <div class="form-group">
                                         <div class="input-with-icon">
                                             <i class="bi bi-text-left"></i>
-                                            <input type="text" class="form-control" name="sbject" placeholder="Subject"
+                                            <input type="text" class="form-control" name="subject" placeholder="Subject"
                                                 required="">
                                         </div>
                                     </div>

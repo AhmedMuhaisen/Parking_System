@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Send_messageMail;
 use App\Models\Building;
 use App\Models\CarsType;
 use App\Models\MotorType;
@@ -16,18 +17,53 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator as FacadesValidator;
 use Illuminate\Validation\Validator;
 class WebsiteController extends Controller
 {
     function index()
     {
-        $settings = Setting::get()[0];
+        $settings = Setting::first();
         $parking_work = ParkingWork::get();
         $testimonials = Testimonial::get();
 
         return view('website.index', compact('settings', 'parking_work', 'testimonials'));
     }
 
+    function profile() {
+         $settings = Setting::first();
+        $parking_work = ParkingWork::get();
+        $testimonials = Testimonial::get();
+
+        return view('website.profile', compact('settings', 'parking_work', 'testimonials'));
+    }
+
+    function contact(Request $request) {
+
+
+   $validator = FacadesValidator::make($request->all(), [
+        'name' => 'required',
+        'email' => 'required|email',
+        'subject' => 'required',
+        'message' => 'required',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json(
+            $validator->errors(), 200); // 422 = Unprocessable Entity
+    }
+  $data = [
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'message' => $request->message,
+        ];
+
+        Mail::to('ahmed@gmail.com')->send(new Send_messageMail($data));
+
+    // success response
+    return response('OK', 200);
+    }
     function register()
     {
         $building = Building::get();
@@ -86,7 +122,7 @@ class WebsiteController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('website'));
+        return redirect(route('website.'));
 
 
 
