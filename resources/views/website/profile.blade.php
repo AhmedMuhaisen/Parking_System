@@ -80,7 +80,7 @@
                                     </button>
                                 </li>
 
-                                    <li class="nav-item" role="presentation">
+                                <li class="nav-item" role="presentation">
                                     <button class="nav-link" data-bs-toggle="tab"
                                         data-bs-target="#service-details-tab-4" type="button" role="tab"
                                         aria-controls="benefits" aria-selected="false">
@@ -107,7 +107,8 @@
                                                         <h4>Vehicle {{ $loop->iteration }} details</h4>
                                                     </div>
 
-                                                    <div> <button href="#" class="btn btn-primary"><i
+                                                    <div> <button href="#" class="btn btn-primary"
+                                                             onclick="openModal('vehicle', {{ $vehicle->id }})">><i
                                                                 class="bi bi-pencil"></i></button>
                                                         <button href="#" class="btn btn-danger"><i
                                                                 class="bi bi-trash"></i></button>
@@ -233,32 +234,32 @@
 
 
 
-                                   <div class="tab-pane fade" id="service-details-tab-4" role="tabpanel"
+                                <div class="tab-pane fade" id="service-details-tab-4" role="tabpanel"
                                     aria-labelledby="benefits-tab">
                                     <div class="row g-4">
                                         @foreach (Auth::user()->testimonials as $testimonial)
                                         <div class="col-md-6">
-        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
-                            <div class="testimonial-header">
-                                <i class="bi bi-quote"></i>
-                                <div class="rating">
-                               @for($i = 0; $i < $testimonial->rating; $i++)
-                                        <i class="bi bi-star-fill"></i>
-                                      @endfor
+                                            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                                                <div class="testimonial-header">
+                                                    <i class="bi bi-quote"></i>
+                                                    <div class="rating">
+                                                        @for($i = 0; $i < $testimonial->rating; $i++)
+                                                            <i class="bi bi-star-fill"></i>
+                                                            @endfor
 
-                                </div>
-                            </div>
-                            <p class="testimonial-text">
-                              {{ $testimonial->text }}
-                            </p>
-                            <div class="client-info">
-                                <div> <button href="#" class="btn btn-primary"><i
+                                                    </div>
+                                                </div>
+                                                <p class="testimonial-text">
+                                                    {{ $testimonial->text }}
+                                                </p>
+                                                <div class="client-info">
+                                                    <div> <button href="#" class="btn btn-primary"><i
                                                                 class="bi bi-pencil"></i></button>
                                                         <button href="#" class="btn btn-danger"><i
                                                                 class="bi bi-trash"></i></button>
                                                     </div>
-                            </div>
-                        </div>
+                                                </div>
+                                            </div>
 
 
 
@@ -283,7 +284,8 @@
                         <div class="action-card" data-aos="zoom-in" data-aos-delay="100">
                             <img src="{{ asset('assets/users/me.jpg')}}" class="profile-img" alt="">
 
-                            <a href="#" class="btn-primary">Edit Your Parsonal Information</a>
+                            <a href="#" class="btn-primary " onclick="openModal('personal',1)">Edit Your Parsonal
+                                Information</a>
 
                         </div>
 
@@ -295,12 +297,279 @@
                     </div>
                 </div>
 
+
+
+
+                <!-- Personal Information Modal -->
+                <div class="modal" id="editModalpersonal1">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Edit Information</h3>
+                            <span class="close" onclick="closeModal('personal',1)">&times;</span>
+                        </div>
+
+                        <form id="editFormpersonal1" action="{{ route('website.edit_personal',Auth::user()->id) }}" method="post">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" id="first_name" value="{{Auth::user()->first_name  }}"
+                                    name="first_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Second Name</label>
+                                <input type="text" id="second_name" value="{{Auth::user()->second_name  }}"
+                                    name="second_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="email" value="{{Auth::user()->email  }}" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="text" id="phone" value="{{Auth::user()->phone  }}" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <x-select name='unit' title="unit" value="{{Auth::user()->unit->id  }}" :array="$units">
+                                </x-select>
+                            </div>
+                            <div class="form-group">
+                                <x-select name='building' title="building" value="{{Auth::user()->building->id  }}"
+                                    :array="$buildings"></x-select>
+                            </div>
+
+                            <button type="submit">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+
+
+
+                @foreach (Auth::user()->vehicle as $vehicle)
+
+                <!-- Vehicle Information Modal -->
+              <div class="modal" id="editModalvehicle{{ $vehicle->id }}">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Edit Information</h3>
+                            <span class="close" onclick="closeModal('vehicle',{{ $vehicle->id }})">&times;</span>
+                        </div>
+
+                        <form id="editFormvehicle{{ $vehicle->id }}" action="{{ route('website.edit_vehicle',$vehicle->id) }}"
+                            method="post">
+                            @csrf
+                            @method('put')
+                            <div class="form-group">
+                                <label>Vehicle Number</label>
+                                <input type="text" id="vehicle_number" name="vehicle_number"
+                                    value="{{ $vehicle->vehicle_number }}" required>
+                            </div>
+                            <div class="form-group">
+   <label>Vehicle Type</label>
+                                  <x-select name='vehicle_type' title="Vehicle Type" value="{{ $vehicle->vehicle_type->id }}" :array="$vehicles_type">
+                                </x-select>
+
+                            </div>
+                            <div class="form-group">
+   <label>Motor Type</label>
+                                <x-select name='motor_type' title="Motor Type" value="{{ $vehicle->motor_type->id }}" :array="$motor_type">
+                                </x-select>
+
+
+                            </div>
+                            <div class="form-group">
+                                <label>Car Type</label>
+                                          <x-select name='car_type' title="car Type" value="{{ $vehicle->car_type->id }}" :array="$car_type">
+                                </x-select>
+                            </div>
+                            <div class="form-group">
+                                <label>Color</label>
+                                <input type="color" id="color" name="color" value="{{ $vehicle->color }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Date Of End</label>
+                                <input type="text" id="date_end" name="date_end" value="{{ $vehicle->date_End }}"
+                                    required>
+                            </div>
+
+                            <button type="submit">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+                @endforeach
+
+
+
             </div>
 
         </div>
 
     </section><!-- /Service Details Section -->
 
+
+
 </main>
+
+@endsection
+
+
+
+@section('javascript')
+{{-- Edit Personal Information --}}
+<script>
+    function openModal(type, id) {
+    document.getElementById('editModal' + type + id).style.display = 'flex';
+  }
+
+  function closeModal(type, id) {
+    document.getElementById('editModal' + type+ id).style.display = 'none';
+  }
+
+  function setupFormHandler(type ,id) {
+    const form = document.getElementById('editForm' + type + id);
+
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      let data = {};
+
+      if (type === "personal") {
+        data = {
+          first_name: document.getElementById('first_name').value,
+          second_name: document.getElementById('second_name').value,
+          email: document.getElementById('email').value,
+          phone: document.getElementById('phone').value,
+          building_id: document.getElementById('building_id').value,
+          unit_id: document.getElementById('unit_id').value,
+        };
+      } else if (type === "vehicle") {
+        data = {
+          vehicle_number: document.getElementById('vehicle_number').value,
+          vehicle_type: document.getElementById('vehicle_type').value,
+          motor_type: document.getElementById('motor_type').value,
+          car_type: document.getElementById('car_type').value,
+          color: document.getElementById('color').value,
+          date_end: document.getElementById('date_end').value,
+        };
+      } else if (type === "guest") {
+        data = {
+          guest_name: document.getElementById('guest_name').value,
+          vehicle_number: document.getElementById('vehicle_number').value,
+          login_date: document.getElementById('login_date').value,
+          login_time: document.getElementById('login_time').value,
+          logout_date: document.getElementById('logout_date').value,
+          logout_time: document.getElementById('logout_time').value,
+        };
+      } else if (type === "testimonial") {
+        data = {
+          rating: document.getElementById('rating').value,
+          message: document.getElementById('message').value,
+        };
+      }
+
+      console.log('Form submitted with:', data);
+
+      alert('Information updated successfully!');
+      closeModal(type);
+    });
+  }
+
+  // Set up all form handlers after DOM is loaded
+  document.addEventListener('DOMContentLoaded', function () {
+    setupFormHandler('personal');
+    setupFormHandler('vehicle');
+    setupFormHandler('guest');
+    setupFormHandler('testimonial');
+  });
+
+//
+
+// <script>
+//   function openModal(type, id) {
+//     document.getElementById('editModal' + type + id).style.display = 'flex';
+//   }
+
+//   function closeModal(type, id) {
+//     document.getElementById('editModal' + type + id).style.display = 'none';
+//   }
+
+//   function setupFormHandler(type, id) {
+//     const form = document.getElementById('editForm' + type + id);
+//     if (!form) return;
+
+//     form.addEventListener('submit', function (e) {
+//       e.preventDefault();
+
+//       let data = {};
+//       let url = form.getAttribute('action');
+
+//       if (type === "personal") {
+//         data = {
+//           first_name: document.getElementById('first_name').value,
+//           second_name: document.getElementById('second_name').value,
+//           email: document.getElementById('email').value,
+//           phone: document.getElementById('phone').value,
+//           building_id: document.getElementById('building_id').value,
+//           unit_id: document.getElementById('unit_id').value,
+//         };
+//       } else if (type === "vehicle") {
+//         data = {
+//           vehicle_number: document.getElementById('vehicle_number').value,
+//           vehicle_type: document.getElementById('vehicle_type').value,
+//           motor_type: document.getElementById('motor_type').value,
+//           car_type: document.getElementById('car_type').value,
+//           color: document.getElementById('color').value,
+//           date_end: document.getElementById('date_end').value,
+//         };
+//       } else if (type === "guest") {
+//         data = {
+//           guest_name: document.getElementById('guest_name').value,
+//           vehicle_number: document.getElementById('vehicle_number').value,
+//           login_date: document.getElementById('login_date').value,
+//           login_time: document.getElementById('login_time').value,
+//           logout_date: document.getElementById('logout_date').value,
+//           logout_time: document.getElementById('logout_time').value,
+//         };
+//       } else if (type === "testimonial") {
+//         data = {
+//           rating: document.getElementById('rating').value,
+//           message: document.getElementById('message').value,
+//         };
+//       }
+
+//       fetch(url, {
+//         method: 'POST', // Use PUT if needed
+//         headers: {
+//           'Content-Type': 'application/json',
+//           'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+//         },
+//         body: JSON.stringify(data)
+//       })
+//       .then(res => res.json())
+//       .then(response => {
+//         console.log('Success:', response);
+//         alert('Information updated successfully!');
+//         closeModal(type, id);
+//       })
+//       .catch(error => {
+//         console.error('Error:', error);
+//         alert('Error updating information.');
+//       });
+//     });
+//   }
+
+//   // Setup handlers after DOM is ready
+//   document.addEventListener('DOMContentLoaded', function () {
+//     @foreach(Auth::user()->vehicle as $vehicle)
+//       setupFormHandler('vehicle', {{ $vehicle->id }});
+//     @endforeach
+
+//     setupFormHandler('personal', {{ Auth::user()->id }});
+//     setupFormHandler('guest', 1); // Adjust ID if needed
+//     setupFormHandler('testimonial', 1); // Adjust ID if needed
+//   });
+//
+
+
+</script>
 
 @endsection

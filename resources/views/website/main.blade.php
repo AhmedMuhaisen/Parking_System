@@ -155,7 +155,7 @@ $Settings=App\Models\Setting::first();
 
   <!-- Main JS File -->
   <script src="{{ asset('assets/website/js/main.js')}}"></script>
-
+@yield('javascript')
 </body>
 
 </html>

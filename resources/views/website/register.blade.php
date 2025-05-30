@@ -112,7 +112,7 @@
                     </div>
                            <div class="form-checkbox">
 
-                             <a href="#" class="text">i have account</a>
+                             <a href="{{ route('login') }}" class="text">i have account</a>
 
 
                     </div>

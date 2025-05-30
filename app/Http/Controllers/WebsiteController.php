@@ -13,6 +13,7 @@ use App\Models\Unit;
 use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\VehiclesType;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
 use Illuminate\Validation\Validator;
+use PHPUnit\TextUI\XmlConfiguration\Logging\Logging;
+use Symfony\Component\Mailer\Transport\Smtp\Auth\LoginAuthenticator;
+
 class WebsiteController extends Controller
 {
     function index()
@@ -33,10 +37,12 @@ class WebsiteController extends Controller
 
     function profile() {
          $settings = Setting::first();
-        $parking_work = ParkingWork::get();
-        $testimonials = Testimonial::get();
-
-        return view('website.profile', compact('settings', 'parking_work', 'testimonials'));
+        $buildings= Building::get();
+        $units = Unit::get();
+ $vehicles_type = VehiclesType::get();
+        $motor_type = MotorType::get();
+        $car_type = CarsType::get();
+        return view('website.profile', compact('units', 'buildings','settings','vehicles_type', 'motor_type', 'car_type'));
     }
 
     function contact(Request $request) {
@@ -64,6 +70,33 @@ class WebsiteController extends Controller
     // success response
     return response('OK', 200);
     }
+     function login()
+    {
+
+        return view('website.login');
+    }
+
+
+    function login_post(Request $request)
+    {
+        $credentials=$request->validate([
+            'email' => ['required', 'string', 'email', 'max:255', 'exists:users,email'],
+            'password' => ['required'],
+
+     ]);
+
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/website'); // Change to your route
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
+
+            }
+
     function register()
     {
         $building = Building::get();
@@ -83,7 +116,7 @@ class WebsiteController extends Controller
             'password' => ['required'],
             'first_name'=>'required',
             'last_name'=>'required',
-            'phone'=>'required',
+            'phone'=>['required ','unique:' . User::class],
             'vehicle_number'=>'required',
             'date_barth'=>'required| date',
             'image'=>'required|file|image|mimes:jpeg,jpg,png,svg|max:2048',
@@ -123,21 +156,5 @@ class WebsiteController extends Controller
         Auth::login($user);
 
         return redirect(route('website.'));
-
-
-
-
-
-
-
-
-
-        $building = Building::get();
-        $unit = Unit::get();
-        $vehicle_type = VehiclesType::get();
-        $motor_type = MotorType::get();
-        $cars_type = CarsType::get();
-
-        return view('website.register', compact('building', 'unit', 'vehicle_type', 'motor_type', 'cars_type'));
     }
 }
